@@ -1,38 +1,50 @@
-🎓 Student Management System (ASP.NET MVC + ADO.NET)
+Perfect 👍
+Below is the **same content rewritten strictly in proper `README.md` (Markdown) format** so it renders correctly on GitHub.
 
-A Student Management System built using ASP.NET MVC with ADO.NET, supporting CRUD operations, row-level editing, AJAX-based dropdowns, and multi-document uploads mapped to document types.
+You can **copy–paste this directly** into `README.md`.
 
-This project is designed with real-world architecture, stored procedures, and proper separation of concerns, making it suitable for college projects, placements, and learning enterprise ASP.NET development.
+---
 
-🚀 Features
+# 🎓 Student Management System
 
-✅ Add / Update / Delete Students
+**ASP.NET MVC + ADO.NET**
 
-✅ Row-level editing without page reload
+A **Student Management System** built using **ASP.NET MVC** with **ADO.NET**, supporting **CRUD operations**, **row-level editing**, **AJAX-based dropdowns**, and **multi-document uploads** mapped to document types.
 
-✅ Department dropdown loaded via AJAX
+This project follows **real-world ASP.NET architecture**, uses **stored procedures only**, and avoids Entity Framework completely.
 
-✅ Gender selection with dropdown
+---
 
-✅ Upload multiple documents per student
+## 🚀 Features
 
-✅ Document types mapping (Aadhar, PAN, DL, etc.)
+* ✅ Create, Read, Update, Delete (CRUD) students
+* ✅ Row-level editing without page reload
+* ✅ AJAX-based department dropdown
+* ✅ Gender selection using dropdown
+* ✅ Upload **multiple documents per student**
+* ✅ Document-type mapping (Aadhar, PAN, DL, etc.)
+* ✅ View uploaded documents
+* ✅ Secure form submission using **Anti-Forgery Token**
+* ✅ 100% **ADO.NET** (No Entity Framework)
 
-✅ View uploaded documents
+---
 
-✅ Secure form submission using Anti-Forgery Token
+## 🛠️ Tech Stack
 
-✅ Uses Stored Procedures only (No Entity Framework)
+| Layer        | Technology                              |
+| ------------ | --------------------------------------- |
+| Frontend     | Razor Views (CSHTML), Bootstrap, jQuery |
+| Backend      | ASP.NET MVC                             |
+| Data Access  | ADO.NET                                 |
+| Database     | SQL Server                              |
+| Security     | Anti-Forgery Token                      |
+| File Uploads | IFormFile + GUID                        |
 
-🛠️ Tech Stack
-Layer	Technology
-Frontend	Razor Views (CSHTML), Bootstrap, jQuery
-Backend	ASP.NET MVC (.NET)
-Data Access	ADO.NET
-Database	SQL Server
-Security	Anti-Forgery Token
-File Uploads	IFormFile, GUID-based naming
-📂 Project Structure
+---
+
+## 📂 Project Structure
+
+```
 CRUD_ADO/
 │
 ├── Controllers/
@@ -51,6 +63,7 @@ CRUD_ADO/
 │   ├── Student/
 │   │   ├── Index.cshtml
 │   │   ├── Create.cshtml
+│   │   ├── Update.cshtml
 │   │   └── ViewDocuments.cshtml
 │
 ├── wwwroot/
@@ -60,161 +73,151 @@ CRUD_ADO/
 │   └── index.js
 │
 └── README.md
+```
 
-🗄️ Database Design
-Tables
+---
 
-Students
+## 🗄️ Database Design
 
-Department
+### Tables
 
-DocumentTypes
+* **Students**
+* **Department**
+* **DocumentTypes**
+* **StudentDocuments**
+* **StudentDocumentFiles**
 
-StudentDocuments
+### Relationships
 
-StudentDocumentFiles
+* One **Student** → Many **Documents**
+* One **DocumentType** → Many **Files**
+* Foreign keys enforced for data integrity
 
-Key Relationships
+---
 
-One Student → Many Documents
+## 📜 Stored Procedures Used
 
-One DocumentType → Many Files
+* `sp_InsertStudent`
+* `sp_UpdateStudent`
+* `sp_DeleteStudent`
+* `sp_SelectAllStudents`
+* `sp_GetDepartments`
+* `sp_GetDocumentTypes`
+* `sp_InsertStudentDocuments`
+* `sp_InsertStudentDocumentFiles`
+* `sp_GetStudentDocuments`
 
-Foreign keys enforced for data integrity
+---
 
-📜 Stored Procedures Used
+## 🔄 Application Execution Flow
 
-sp_InsertStudent
+1. User submits form with **Anti-Forgery Token**
+2. MVC model binding maps form → ViewModel
+3. Controller validates `ModelState`
+4. DAL executes stored procedures via ADO.NET
+5. Files saved in `/wwwroot/uploads` using **GUID**
+6. File metadata stored in database
+7. Redirect to Index page with `TempData` message
 
-sp_UpdateStudent
+---
 
-sp_DeleteStudent
+## 📁 File Upload Strategy
 
-sp_SelectAllStudents
+* Supports **multiple file uploads**
+* Each file mapped to a **document type**
+* Files stored as:
 
-sp_GetDepartments
-
-sp_GetDocumentTypes
-
-sp_InsertStudentDocuments
-
-sp_InsertStudentDocumentFiles
-
-sp_GetStudentDocuments
-
-🔄 Execution Flow (High Level)
-
-User submits form with Anti-Forgery Token
-
-MVC Model Binding maps form → ViewModel
-
-Controller validates ModelState
-
-DAL executes Stored Procedures via ADO.NET
-
-Files are saved in wwwroot/uploads with GUID
-
-File metadata stored in DB
-
-User redirected with TempData success message
-
-📁 File Upload Strategy
-
-Multiple files supported
-
-Each file mapped to a Document Type
-
-Files stored as:
-
+```
 /wwwroot/uploads/{GUID}_{OriginalFileName}
+```
 
+* Database stores:
 
-Database stores:
+  * Original file name
+  * File path
+  * Document type ID
+  * Student ID
 
-Original file name
+---
 
-Relative file path
+## 🔐 Security
 
-Document type
+* Anti-Forgery Token for POST requests
+* SQL Injection protection using:
 
-Student ID
+  * Stored Procedures
+  * Parameterized queries
+* File name collision prevention using GUID
 
-🔐 Security
+---
 
-Anti-Forgery Token enabled for all POST requests
+## ⚡ AJAX Usage
 
-SQL Injection prevented using:
+* Load departments dynamically
+* Load document types dynamically
+* Improves UX (no full page reloads)
 
-Stored Procedures
+---
 
-Parameterized queries
+## 🧪 Error Handling
 
-File name collision avoided using GUID
+* Handles `DBNull` values safely
+* Uses nullable fields where required
+* Validates input before database operations
 
-📌 AJAX Usage
+---
 
-Load Departments dynamically
+## 🎯 Learning Outcomes
 
-Load Document Types dynamically
+* ASP.NET MVC architecture
+* ADO.NET with Stored Procedures
+* Model vs ViewModel usage
+* AJAX integration in MVC
+* Secure file uploads
+* Real-world CRUD workflows
 
-Improves UX by avoiding page reloads
+---
 
-🧪 Error Handling
+## ▶️ How to Run the Project
 
-Handles DBNull safely in ADO.NET
+1. Clone the repository
 
-Uses nullable types where required
-
-Validates input before DB operations
-
-🎯 Learning Outcomes
-
-ASP.NET MVC architecture
-
-ADO.NET with Stored Procedures
-
-Model vs ViewModel usage
-
-AJAX integration in MVC
-
-File uploads & DB mapping
-
-Real-world CRUD patterns
-
-▶️ How to Run the Project
-
-Clone the repository
-
+```bash
 git clone https://github.com/your-username/student-management-ado.git
+```
 
+2. Configure SQL Server connection string in `appsettings.json`
 
-Configure SQL Server connection string in appsettings.json
+3. Execute SQL scripts to create:
 
-Run SQL scripts to create:
+   * Tables
+   * Stored Procedures
 
-Tables
+4. Open the project in **Visual Studio**
 
-Stored Procedures
+5. Run the application 🎉
 
-Open project in Visual Studio
+---
 
-Run the application 🎉
+## 👨‍💻 Author
 
-📸 Screenshots (Optional)
+**Sahil Sawant**
+MCA Student
+ASP.NET MVC | ADO.NET | SQL Server
 
-Student List
+---
 
-Row Editing
+## ⭐ Support
 
-Create Student
+If you found this project useful, please give it a ⭐ on GitHub!
 
-Document Upload
+---
 
-View Documents
+If you want next:
 
-(Add screenshots here)
+* 📌 **ER Diagram**
+* 📌 **SQL scripts section**
+* 📌 **Resume-ready project description**
+* 📌 **System architecture diagram**
 
-👨‍💻 Author
-
-Sahil Sawant
-MCA Student | ASP.NET | ADO.NET | SQL Server
+Just tell me 👍
