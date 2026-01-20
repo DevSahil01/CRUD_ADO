@@ -1,0 +1,13 @@
+﻿@model StudentDocumentEditModel
+
+<form asp-action="EditDocument" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="DocId" value="@Model.DocId"/>
+    <input type="hidden"  asp-for="StudentId"  value="@Model.StudentId"/>
+    <div>
+        <label>Upload New File (optional)</label>
+        <br/>
+        <input type="file" asp-for="DocFile" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+</form>

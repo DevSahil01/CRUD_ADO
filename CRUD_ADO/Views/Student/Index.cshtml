@@ -1,0 +1,161 @@
+﻿@model List<StudentViewModel>
+
+
+
+<a href="/Student/Create"><button class="btn btn-primary">Add Student</button></a>
+
+<div class="text-center">
+    <h1 class="display-4">Student Management</h1>
+
+</div>
+@if(TempData["success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+
+<table border="1" class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Age</th>
+            <th>Department</th>
+            <th>Gender</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var s in Model)
+    {
+        <tr>
+            <td>@s.Name</td>
+            <td>@s.Email</td>
+            <td>@s.Phone</td>
+            <td>@s.Age</td>
+            <td>@s.DepartmentName</td>
+            <td>@s.Gender</td>
+            <td>@(s.isActive==1 ? "Active" : "Inactive")</td>
+
+         
+            <td>
+                    <a href="/Student/Update/@s.Id" class=" btn btn-outline-secondary">
+                Edit </a>
+                <a href="/Student/Delete/@s.Id"><button class="btn btn-outline-danger">Delete</button></a>
+                    <a href="/Student/ViewDocuments/@s.Id" class="btn btn-outline-info">
+                        View Docs
+                    </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+<div class="mt-5"> 
+
+
+<div class="text-center">
+    <h1 class="display-4">Row Editing</h1>
+
+</div>
+
+<table border="1" class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Age</th>
+            <th>Department</th>
+            <th>Gender</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var s in Model)
+        {
+            <tr>                     
+                <form id="updateData-@s.Id" asp-action="Update"  method="post" >
+                    <input type="hidden" name="Id" id="stdId" value=@s.Id />
+                    <td  >
+                        <input class="editable-@s.Id d-none form-control" name="Name" type="text" id-data=@s.Id value="@s.Name" />
+                    <span class="not-editable-@s.Id">@s.Name</span>
+                    </td> 
+
+                   
+                    <td >
+                        <input class="editable-@s.Id d-none form-control" type="text" name="Email" value=@s.Email id-data=@s.Id />
+                    <span class="not-editable-@s.Id">@s.Email</span>
+                    </td>
+
+
+                    <td >
+                        <input class="editable-@s.Id d-none form-control" type="number" name="Phone" value=@s.Phone id-data=@s.Id />
+                    <span class="not-editable-@s.Id">@s.Phone</span>
+                    </td>
+
+
+                    <td >
+                        <input class="editable-@s.Id d-none form-control" type="number" name="Age" value=@s.Age id-data=@s.Id />
+                    <span class="not-editable-@s.Id">@s.Age</span>
+                    </td>
+
+                    <td >
+                        <div class="form-group  editable-@s.Id d-none ">
+                            <select class="form-select" id="DepartmentId-@s.Id" name="DeptId">
+                            </select>
+                        </div>
+                        <span class="not-editable-@s.Id">@s.DepartmentName</span>
+                    </td>
+                    <td>
+                        <div class="form-group editable-@s.Id d-none">
+                            <select class="form-select"
+                                    name="Gender"
+                                    id="gender-@s.Id">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+
+                        <span class="not-editable-@s.Id">@s.Gender</span>
+                    </td>
+
+
+
+                    <td >
+                    @* <a href="/Student/Update/@s.Id" class=""> *@
+                        <button type="button" class="btn btn-outline-secondary" onclick="EditFunc(event,@s.Id);" id=@s.Id > Edit </button>
+                    <a href="/Student/Delete/@s.Id" class="btn btn-outline-danger">Delete</a>
+                        
+                </td>
+                    </form>
+            </tr>
+        }
+    </tbody>
+</table>
+  
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script > 
+     const student= @Html.Raw(
+                System.Text.Json.JsonSerializer.Serialize(Model)
+        )
+    console.log(student)
+   
+</script>
+<script src="~/js/index.js">
+
+</script>
+

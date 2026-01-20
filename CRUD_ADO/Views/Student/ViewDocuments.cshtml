@@ -1,0 +1,42 @@
+﻿@model List<StudentDocumentViewModel>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Document Type</th>
+            <th>File Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+
+        @foreach (var doc in Model)
+        {
+            <tr>
+                <td>@doc.DocumentName</td>
+                <td>@(doc.FileName== null ? "Document Not Uploaded " : doc.FileName)</td>
+                <td style="display : @(string.IsNullOrEmpty(doc.FileName) ? "none" : "block")">
+                    <a href="@doc.FilePath" target="_blank" class="btn btn-sm btn-primary">
+                        View
+                    </a>
+                    <a href="@doc.FilePath" download class="btn btn-sm btn-success">
+                        Download
+                    </a>
+                    <a class="btn btn-sm btn-secondary" asp-action="EditDocumentPage"
+                     asp-route-DocId="@doc.DocumentId"
+                       asp-route-StudentId="@ViewContext.RouteData.Values["id"]">Edit</a>
+                
+                </td>
+                <td style="display : @(string.IsNullOrEmpty(doc.FileName) ? "block" : "none")">
+                    <a href="@doc.FilePath" class="btn btn-sm btn-info" >
+                        Add Document
+                    </a>
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Back</a>
