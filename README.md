@@ -1,7 +1,4 @@
-Perfect 👍
-Below is the **same content rewritten strictly in proper `README.md` (Markdown) format** so it renders correctly on GitHub.
 
-You can **copy–paste this directly** into `README.md`.
 
 ---
 
@@ -212,12 +209,3 @@ ASP.NET MVC | ADO.NET | SQL Server
 If you found this project useful, please give it a ⭐ on GitHub!
 
 ---
-
-If you want next:
-
-* 📌 **ER Diagram**
-* 📌 **SQL scripts section**
-* 📌 **Resume-ready project description**
-* 📌 **System architecture diagram**
-
-Just tell me 👍
